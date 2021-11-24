@@ -56,7 +56,15 @@ class Solver:
             x_n = new_x_n
 
     def solve_modified_newton_method(self):
-        pass
+        x_n = self.x_0
+        counter = 0
+        while True:
+            counter += 1
+            new_x_n = x_n - f(x_n) / derivative_f(self.x_0)
+            if math.fabs(new_x_n - x_n) <= self.epsilon:
+                print('Количество итераций:', counter)
+                return new_x_n
+            x_n = new_x_n
 
     def solve_chord_method(self):
         x_n = self.segment[1] if self.x_0 == self.segment[0] else self.segment[0]
@@ -111,6 +119,10 @@ def main():
 
     print('Метод Ньютона')
     print(solver.solve_newton_method())
+    print()
+
+    print('Модифицированный метод Ньютона')
+    print(solver.solve_modified_newton_method())
     print()
 
     print('Метод неподвижных хорд')
